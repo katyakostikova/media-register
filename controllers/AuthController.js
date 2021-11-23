@@ -1,21 +1,22 @@
 const AuthRepository = require('../repositories/AuthRepository');
 const authRepository = new AuthRepository();
 
+//@СДЕЛАЛА@
 module.exports = {
     async getRegData(req, res) {
-        const institutions = await authRepository.getInstitutions();
+        const foundations = await authRepository.getFoundations();
         const positions = await authRepository.getPositions();
-        const issues = await authRepository.getIssues();
-        res.render('registration', {institutions: institutions.rows, positions: positions.rows, issues: issues.rows});
+        const passAuth = await authRepository.getPassportAuth();
+        res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
     },
 
     async addAdmin(req, res) {
         const error = await authRepository.getErrorMessage(req.body, 2);
         if (error !== "") {
-            const institutions = await authRepository.getInstitutions();
+            const foundations = await authRepository.getFoundations();
             const positions = await authRepository.getPositions();
-            const issues = await authRepository.getIssues();
-            res.render('registration', {errorMessage: error, institutions: institutions.rows, positions: positions.rows, issues: issues.rows});
+            const passAuth = await authRepository.getPassportAuth();
+            res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
             return;
         }
         const added = await authRepository.addAdmin(req.body);
@@ -41,9 +42,7 @@ module.exports = {
     },
 
     async logout(req, res) {
-        console.log('here1');
         const deletedCurrentPerson = await authRepository.deleteCurrentPerson();
-        console.log('here');
         res.redirect('/');
     },
 }
