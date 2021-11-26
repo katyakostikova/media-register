@@ -61,29 +61,37 @@
         <form action="/forms/filtered" , method="get" , enctype="multipart/form-data">
             <div class="filtersMainDiv">
                 <div class="tileDive">
-                    <img src="/images/calendar.png" alt="date of usage">
-                    <p>Дата використання</p>
+               
+                    <p>Дата держ. реєстрації</p>
                     <div>
                         <input class="dateInput" type="date" name="usage_date"/>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/series.png" alt="series">
-                    <p>Серія</p>
+                   
+                    <p>Серія свідоцтва</p>
                     <div>
                         <input class="seriesInput" type="number" placeholder="0" name="series"/>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/number.png" alt="number">
-                    <p>Номер</p>
+                
+                    <p>Номер свідоцтва</p>
                     <div>
                         <input class="numberInput" type="number" placeholder="0" name="number"/>
                     </div>
                 </div>
+                 <div class="tileDive">
+                 
+                    <p>Орган, що зареєстрував</p>
+                    <div>
+                        <input class="numberInput" type="number" placeholder="0" name="number"/>
+                    </div>
+                </div>
+
                 <div class="tileDive bigDiv">
-                    <img src="/images/register.png" alt="registered on">
-                    <p>Зареєстровано на</p>
+                  
+                    <p>Засновник</p>
                     <div class="initialsDiv">
                         <input class="registeredOnInput" type="text" placeholder="Ім'я: Іван" name="name"/>
                         <input class="registeredOnInput" type="text" placeholder="Прізвище: Іванов" name="surname"/>
@@ -92,14 +100,14 @@
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/status.png" alt="document status">
-                    <p>Статус бланка</p>
+                  
+                    <p>Вид видання</p>
                     <div>
                         <select class="statusInput" name="status">
-                            <option value="">-- статус --</option>
-                            <option value="Зіпсований">Зіпсований</option>
-                            <option value="Невикористаний">Невикористаний</option>
-                            <option value="Використаний">Використаний</option>
+                            <option value="">-- вид --</option>
+                            <option value="ЗМІ">ЗМІ</option>
+                            <option value="ІА">ІА</option>
+                            
                         </select>
                     </div>
                 </div>
