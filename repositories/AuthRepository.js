@@ -40,6 +40,18 @@ class AuthRepository {
         );
     };
 
+    async addRegistrator(adminData) {
+        return await db.query(`insert into passports (number, series, issue_date, issued_by) values (${adminData.passport_number}, ${adminData.series === undefined ? null : adminData.series}, '${adminData.passport_date.toString()}', (select id from passport_authorities where number = ${adminData.passport_issue}));
+        insert into persons (
+        name, surname, midname, passport_id, birthday, taxnum, login, password, foundation_id, position_id, is_active, role, email
+        ) values (
+        '${adminData.name.toString()}', '${adminData.surname.toString()}', '${adminData.midname.toString()}', (select id from passports where number = '${adminData.passport_number.toString()}'), '${adminData.birthdate.toString()}', ${adminData.taxnum}, 
+        '${adminData.login.toString()}', '${md5(adminData.password).toString()}', (select id from institutions where name = '${adminData.institution.toString()}'), (select id from positions where name = '${adminData.position.toString()}'), 
+        true, 'Реєстратор', '${adminData.email.toString()}')
+        )`
+        );
+    };
+
     async getErrorMessage(data, type) {
         if (type === 1) {
             console.log(data);
@@ -53,27 +65,8 @@ class AuthRepository {
             }
             return "";
         }
-        else {
-            let foundAdmins = await this.getAdmin(data.login.toString());
-            if (foundAdmins.rows[0].count !== '0') {
-                return "Error: адміністратор з таким логіном вже існує";
-            }
-            if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
-            return "";
-        }
-    };
-
-    async getLoginData(loginData) {
-        return await db.query(`select id, role, login from persons where (login = '${loginData.login}' and password = '${md5(loginData.password)}')`);
-    };
-
-    async addCurrentPerson(personId) {
-        return await db.query(`insert into current_per (id) values (${personId})`);
-    };
-
-    async deleteCurrentPerson() {
-        return await db.query(`delete from current_per`);
-    };
+    }
 }
+
 
 module.exports = AuthRepository;
