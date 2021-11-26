@@ -8,7 +8,7 @@ class MassMediaRepository {
 
     async getFilteredMassMedias(number, series, name, surname, midname) {
 
-        return await db.query(`select * from mass_medias where (\n` +
+        return await db.query(`select * from mass_media where (\n` +
             `(cast(series as text) like '%${series.toString()}%') and \n` +
             `(cast(number as text) like '%${number.toString()}%') and \n` +
             `(person_id in (\n` +
@@ -21,14 +21,14 @@ class MassMediaRepository {
     };
 
     async getMassMediaById(id) {
-        return await db.query(`select mass_medias.id, number, series, name, is_active,
-        surname, midname, status from 
-	    mass_medias inner join persons on mass_medias.person_id = persons.id 
-	    where mass_medias.id = ${id}`);
+        return await db.query(`select mass_media.id, number, series, mass_media.name, is_active,
+        surname, midname from 
+	    mass_media inner join persons on mass_media.person_id = persons.id 
+	    where mass_media.id = ${id}`);
     };
 
     async getCurrentPerson() {
-        return await db.query(`select login, role from persons where id = (select id from current_person)`);
+        return await db.query(`select login, role from persons where id = (select id from current_per)`);
     };
 
     async getLogins() {
@@ -36,7 +36,7 @@ class MassMediaRepository {
     };
 
     async addMassMedia(massMediaData) {
-        return await db.query(`insert into mass_medias(number, series, type, name, language, date_registration, scope_of_distribution,
+        return await db.query(`insert into mass_media(number, series, type, name, language, date_registarion, scope_of_distribution,
             frequency_of_issue, amount, objectives, person_id, who_registered) 
             values (${massMediaData.number}, ${massMediaData.series},
                  '${massMediaData.type.toString()}', '${massMediaData.name.toString()}',
