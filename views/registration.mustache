@@ -25,11 +25,11 @@
                     <!--                <label>Прізвище</label>-->
                 </div>
                 <div>
-                    <input class="regInput" type="text" name="middle_name" placeholder="По-батькові" required>
+                    <input class="regInput" type="text" name="midname" placeholder="По-батькові" required>
                     <!--                <label>По-батькові</label>-->
                 </div>
                 <div>
-                    <input class="regInput" type="text" name="birthdate" placeholder="Дата народження" onfocus="(this.type='date')"
+                    <input class="regInput" type="text" name="birthday" placeholder="Дата народження" onfocus="(this.type='date')"
                            onblur="(this.type='text')" required>
                     <!--                <label>Дата народження</label>-->
                 </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="centralFormDiv">
                 <div>
-                    <input class="regInput" type="text" name="passport_number" placeholder="Номер паспорта" required>
+                    <input class="regInput" type="text" name="passport_number" placeholder="Номер паспорта" type="number" required>
                     <!--                    <label>Номер паспорта</label>-->
                 </div>
                 <div>
@@ -58,16 +58,16 @@
                     <!--                    <label>Орган видачі</label>-->
                     <select class="regInput" class="statusInput" name="passport_issue" required>
                         <option value="">-- Орган видачі --</option>
-                        {{#issues}}
+                        {{#passAuth}}
                             <option value="{{number}}">{{number}}</option>
-                        {{/issues}}
+                        {{/passAuth}}
                         <!--                        <option value="Орг1">Орг1</option>-->
                         <!--                        <option value="Орг2">Орг2</option>-->
                         <!--                        <option value="Орг3">Орг3</option>-->
                     </select>
                 </div>
                 <div>
-                    <input class="regInput" type="number" name="taxpayer_number" maxlength="10" minlength="10" placeholder="РНОКПП"
+                    <input class="regInput" type="number" name="taxnum" maxlength="10" minlength="10" placeholder="РНОКПП"
                            required>
                     <!--                    <label>РНОКПП</label>-->
                 </div>
@@ -86,11 +86,11 @@
                     <!--                    <label>Підтвердити пароль</label>-->
                 </div>
                 <div>
-                    <select class="regInput" class="statusInput" name="institution">
+                    <select class="regInput" class="statusInput" name="foundations">
                         <option value="">-- Організація --</option>
-                        {{#institutions}}
+                        {{#foundations}}
                             <option value="{{name}}">{{name}}</option>
-                        {{/institutions}}
+                        {{/foundations}}
                     </select>
                 </div>
                 <div>
