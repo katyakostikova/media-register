@@ -42,7 +42,7 @@ module.exports = {
         console.log(currentPerson)
         if (currentPerson.rowCount === 0) {
        // if(true){
-            res.render('home', {login: "", role: ""});
+            res.render('login', {login: "", role: ""});
             // res.render('login', {login: "", role: ""});
             return;
         }

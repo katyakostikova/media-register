@@ -42,6 +42,7 @@ module.exports = {
     },
 
     async logout(req, res) {
+        console.log("logout called ")
         const deletedCurrentPerson = await authRepository.deleteCurrentPerson();
         res.redirect('/');
     },

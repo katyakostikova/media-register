@@ -98,7 +98,9 @@ class AuthRepository {
     };
 
     async deleteCurrentPerson() {
-        return await db.query(`delete from current_per`);
+       var  result =  await db.query(`delete from current_per`);
+        console.log("try to delete persen " + result);
+        return result;
     };
 }
 
