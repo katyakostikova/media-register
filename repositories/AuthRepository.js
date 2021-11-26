@@ -71,22 +71,19 @@ class AuthRepository {
         }
         else if (type === 2) {
             let foundAdmins = await this.getUser(data.login.toString());
-            let foundEmails = await this.getEmails(data.email.toString());
+
             if (foundAdmins.rows[0].count !== '0') {
-                return "Помилка: адміністратор з таким логіном вже існує";
+                return "Error: адміністратор з таким логіном вже існує";
             }
-            if (data.password !== data.password_confirmation) return "Помилка: паролі не співпадають";
-            if (foundEmails.rows[0].count === '0') {
-                return "Помилка: Такої пошти Адміністратора не існує";
-            }
+            if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
             return "";
         }
         else {
             let foundRegistrators = await this.getUser(data.login.toString());
             if (foundRegistrators.rows[0].count !== '0') {
-                return "Помилка: Реєстратор з таким логіном вже існує";
+                return "Error: Реєстратор з таким логіном вже існує";
             }
-            if (data.password !== data.password_confirmation) return "Помилка: паролі не співпадають";
+            if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
             return "";
         }
     }
