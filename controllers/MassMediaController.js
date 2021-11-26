@@ -46,7 +46,7 @@ module.exports = {
             // res.render('login', {login: "", role: ""});
             return;
         }
-        res.render('home', {login: currentPerson.rows[0].login, role: currentPerson.rows[0].role});
+        res.render('home', {login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id});
     },
 
     async getMassMediaData(req, res) {

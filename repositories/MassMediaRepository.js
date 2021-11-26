@@ -28,7 +28,7 @@ class MassMediaRepository {
     };
 
     async getCurrentPerson() {
-        return await db.query(`select login, role from persons where id = (select id from current_per)`);
+        return await db.query(`select login, role, id from persons where id = (select id from current_per)`);
     };
 
     async getLogins() {
@@ -85,9 +85,9 @@ class MassMediaRepository {
         status_id = ${formData.old_status_id} where (id = ${id})`);
     };
 
-    async getUserById(id) {
-        return await db.query(`select id, name, surname, middle_name, to_char(birth_date, 'YYYY-MM-DD') as birth_date, role, is_active from persons where (id = ${id})`);
-    };
+  /*  async getUserById(id) {
+        return await db.query(`select id, name, surname, midname, to_char(birthday, 'YYYY-MM-DD') as birthday, role, is_active from persons where (id = ${id})`);
+    };*/
 
     async getRegistrators() {
         return await db.query(`select * from persons where (role = 'Реєстратор')`);
