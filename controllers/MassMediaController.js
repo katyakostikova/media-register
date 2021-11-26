@@ -39,8 +39,11 @@ module.exports = {
 
     async getHomePage(req, res) {
         const currentPerson = await massMediaRepository.getCurrentPerson();
+        console.log(currentPerson)
         if (currentPerson.rowCount === 0) {
+       // if(true){
             res.render('home', {login: "", role: ""});
+            // res.render('login', {login: "", role: ""});
             return;
         }
         res.render('home', {login: currentPerson.rows[0].login, role: currentPerson.rows[0].role});

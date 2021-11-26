@@ -5,7 +5,7 @@ const path = require('path');
 const body_parser = require('body-parser')
 const busboyBodyParser = require('busboy-body-parser');
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8082
 const app = express()
 
 app.use(express.static('./public'));

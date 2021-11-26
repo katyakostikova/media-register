@@ -28,7 +28,7 @@ class MassMediaRepository {
     };
 
     async getCurrentPerson() {
-        return await db.query(`select login, role from persons where id = (select id from current_person)`);
+        return await db.query(`select login, role from persons where id = (select id from current_per)`);
     };
 
     async getLogins() {
