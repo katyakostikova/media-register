@@ -27,7 +27,7 @@ class MassMediaRepository {
 
     async getMassMediaById(id) {
         return await db.query(`select mass_media.id, number, series, to_char(date_registarion, 'YYYY-MM-DD') as date, type, mass_media.name, language, date_registarion, scope_of_distribution, who_registered, frequency_of_issue, amount, is_active,
-        persons.name, surname, midname from 
+        persons.name as pername, surname, midname from 
 	    mass_media inner join persons on mass_media.person_id = persons.id 
 	    where mass_media.id = ${id}`);
     };

@@ -35,12 +35,17 @@
 <div class="mainDiv">
     <div class="leftPartMainDiv">
         <p class="mainListP">Список ЗМІ та ІА</p>
+        {{#isRegistrator}}
+            <div class="aContainerDiv">
+                <a href="/mass_medias/new" id="addA">Додати ЗМІ або ІА</a>
+            </div>
+        {{/isRegistrator}}
         <div class="scrollableDocsDiv">
             {{#mass_media}}
                 <div>
                     <a href="/mass_medias/{{id}}">
                         <div>
-                            <p>Бланк&nbsp;&nbsp;№{{number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+                            <p>{{type}}&nbsp;&nbsp;№{{number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Серія&nbsp;&nbsp;№{{series}}</p>
                         </div>
                     </a>
@@ -50,11 +55,6 @@
                 <p class="mainListP borderedP">ЗМІ або ІА з такими параметрами не знайдено</p>
             {{/mass_media}}
         </div>
-        {{#isRegistrator}}
-            <div class="aContainerDiv">
-                <a href="/mass_medias/new" id="addA">Додати ЗМІ або ІА</a>
-            </div>
-        {{/isRegistrator}}
     </div>
     <div class="rightPartMainDiv">
         <p class="mainListP">Пошук (фільтрація)</p>

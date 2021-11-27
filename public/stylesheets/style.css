@@ -584,3 +584,28 @@ a {
 .rightPartMainDiv.newMassMedia {
     border: 0px;
 }
+
+.aContainerDiv {
+    display: block;
+    font-size: 18px;
+    font-weight: 300;
+    margin: 15px auto 15px auto;
+    text-align: center;
+    border: 3px solid #ff9a03;
+    color: #000;
+    background: transparent;
+    padding: 10px 40px;
+    cursor: pointer;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.33s ease-in-out;
+}
+.aContainerDiv:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.massMediaInfoP {
+    font-size: 30px;
+    font-weight: bold;
+}
