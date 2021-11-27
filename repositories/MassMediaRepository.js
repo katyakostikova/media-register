@@ -26,8 +26,8 @@ class MassMediaRepository {
     };
 
     async getMassMediaById(id) {
-        return await db.query(`select mass_media.id, number, series, to_char(date_registarion, 'YYYY-MM-DD') as date, mass_media.name, is_active,
-        surname, midname from 
+        return await db.query(`select mass_media.id, number, series, to_char(date_registarion, 'YYYY-MM-DD') as date, type, mass_media.name, language, date_registarion, scope_of_distribution, who_registered, frequency_of_issue, amount, is_active,
+        persons.name, surname, midname from 
 	    mass_media inner join persons on mass_media.person_id = persons.id 
 	    where mass_media.id = ${id}`);
     };
@@ -45,7 +45,7 @@ class MassMediaRepository {
             frequency_of_issue, amount, objectives, person_id, who_registered) 
             values (${massMediaData.number}, ${massMediaData.series},
                  '${massMediaData.type.toString()}', '${massMediaData.name.toString()}',
-                 '${massMediaData.language.toString()}', '${moment().format('L').toString()}',
+                 '${massMediaData.language.toString()}', '${moment().format('Y-M-D').toString()}',
                  '${massMediaData.scope_of_distribution.toString()}', '${massMediaData.frequency_of_issue.toString()}',
                  '${massMediaData.amount}', null, (select id from persons where (login = '${massMediaData.login.toString()}')),
                  '${massMediaData.login.toString()}')`);

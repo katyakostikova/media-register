@@ -38,8 +38,7 @@
             {{#mass_media}}
                 <div>
                     <div>
-                        <img src="/images/document.png" alt="document">
-                        <p class="firstP">Бланк&nbsp;&nbsp;№{{number}}</p>
+                        <p class="firstP">={{type}}&nbsp;&nbsp;№{{number}}</p>
                         <p>Серія&nbsp;&nbsp;№{{series}}</p>
                     </div>
                 </div>
@@ -50,24 +49,57 @@
             {{#mass_media}}
             <div class="filtersMainDiv">
                 <div class="tileDive">
-                    <img src="/images/calendar.png" alt="date of usage">
-                    <p>Дата використання</p>
+                    <p>Дата реєстрації</p>
                     <div>
-                        <p>{{date}}</p>
+                        <p>{{date_registarion}}</p>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Назва</p>
+                    <div>
+                        <p>{{name}}</p>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Мова видання</p>
+                    <div>
+                        <p>{{language}}</p>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Cфера розповсюдження</p>
+                    <div>
+                        <p>{{scope_of_distribution}}</p>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Періодичність випуску / обсяг</p>
+                    <div>
+                        <p>{{frequency_of_issue}} / {{amount}}</p>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Тематична спрямованість (програмні цілі)</p>
+                    <div>
+                        <p>{{objectives}}</p>
                     </div>
                 </div>
                 <div class="tileDive bigDiv">
-                    <img src="/images/register.png" alt="registered on">
-                    <p>Зареєстровано на</p>
+                    <p>Належить</p>
                     <div class="initialsDiv">
                         <p>{{name}}</p>
                         <p>{{surname}}</p>
                         <p>{{midname}}</p>
                     </div>
                 </div>
+                <div class="tileDive">
+                    <p>Ким зареэстровано</p>
+                    <div>
+                        <p>{{who_registered}}</p>
+                    </div>
+                </div>
                 <div class="tileDive tileDive2">
-                    <img src="/images/status.png" alt="document status">
-                    <p>Статус бланка</p>
+                    <p>Стан</p>
                     <div>
                         <p>{{is_active}}</p>
                     </div>
