@@ -28,6 +28,29 @@ module.exports = {
             isRegistrator: currentPerson.rows[0].role === "Реєстратор"});
     },
 
+    async viewRegistrator(req, res) {
+        const user = await massMediaRepository.getUserById(req.params.id);
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: true});
+    },
+
+    async activateRegistrator(req, res) {
+        const activatedRegistrator = await massMediaRepository.activateRegistrator(req.params.id);
+        const user = await massMediaRepository.getUserById(req.params.id);
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: true});
+    },
+
+    async deactivateRegistrator(req, res) {
+        const deactivatedRegistrator = await massMediaRepository.deactivateRegistrator(req.params.id);
+        const user = await massMediaRepository.getUserById(req.params.id);
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: true});
+    },
+
     /*
 {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: false}
