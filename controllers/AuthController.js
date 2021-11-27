@@ -64,6 +64,26 @@ module.exports = {
          }
      },
 
+//TODO need to change form and have function to generate login and password using email and pib of user
+    async addUser(req, res) {
+         const error = await authRepository.getErrorMessage(req.body, 1);
+         if (error !== "") {
+             const foundations = await authRepository.getFoundations();
+             const positions = await authRepository.getPositions();
+             const passAuth = await authRepository.getPassportAuth();
+             res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+             return;
+         }
+         const added = await authRepository.addRegistrator(req.body);
+         if (added) {
+             const registrators = await massMediaRepository.getRegistrators();
+            res.render('registrators', {registrators: registrators.rows});
+         }
+         else {
+             res.redirect('/error');
+         }
+     },
+
     async getLoginData(req, res) {
         const error = await authRepository.getErrorMessage(req.body, 1);
         console.log(error)

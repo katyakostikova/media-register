@@ -35,7 +35,7 @@
 <div class="mainDiv">
     <div class="leftPartMainDiv">
         <div class="formDiv">
-            {{#form}}
+            {{#mass_media}}
                 <div>
                     <div>
                         <img src="/images/document.png" alt="document">
@@ -43,17 +43,17 @@
                         <p>Серія&nbsp;&nbsp;№{{series}}</p>
                     </div>
                 </div>
-            {{/form}}
+            {{/mass_media}}
         </div>
     </div>
     <div class="rightPartMainDiv">
-            {{#form}}
+            {{#mass_media}}
             <div class="filtersMainDiv">
                 <div class="tileDive">
                     <img src="/images/calendar.png" alt="date of usage">
                     <p>Дата використання</p>
                     <div>
-                        <p>{{usage_date}}</p>
+                        <p>{{date}}</p>
                     </div>
                 </div>
                 <div class="tileDive bigDiv">
@@ -62,18 +62,18 @@
                     <div class="initialsDiv">
                         <p>{{name}}</p>
                         <p>{{surname}}</p>
-                        <p>{{middle_name}}</p>
+                        <p>{{midname}}</p>
                     </div>
                 </div>
                 <div class="tileDive tileDive2">
                     <img src="/images/status.png" alt="document status">
                     <p>Статус бланка</p>
                     <div>
-                        <p>{{status}}</p>
+                        <p>{{is_active}}</p>
                     </div>
                 </div>
             </div>
-            {{/form}}
+            {{/mass_media}}
     </div>
 </div>
 {{> footer}}

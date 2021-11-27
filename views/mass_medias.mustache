@@ -36,7 +36,7 @@
     <div class="leftPartMainDiv">
         <p class="mainListP">Список ЗМІ та ІА</p>
         <div class="scrollableDocsDiv">
-            {{#forms}}
+            {{#mass_media}}
                 <div>
                     <a href="/mass_medias/{{id}}">
                         <div>
@@ -45,10 +45,10 @@
                         </div>
                     </a>
                 </div>
-            {{/forms}}
-            {{^forms}}
+            {{/mass_media}}
+            {{^mass_media}}
                 <p class="mainListP borderedP">ЗМІ або ІА з такими параметрами не знайдено</p>
-            {{/forms}}
+            {{/mass_media}}
         </div>
         {{#isRegistrator}}
             <div class="aContainerDiv">

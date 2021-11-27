@@ -1,4 +1,5 @@
 const db = require('../db');
+const moment= require('moment') 
 
 class MassMediaRepository {
     async getMassMedias() {
@@ -6,6 +7,11 @@ class MassMediaRepository {
     };
 
     async getFilteredMassMedias(number, series, name, surname, midname) {
+
+      //  var query = `select * from mass_media where `;
+
+       // if (number) {}
+
 
         return await db.query(`select * from mass_media where (\n` +
             `(cast(series as text) like '%${series.toString()}%') and \n` +
@@ -20,7 +26,7 @@ class MassMediaRepository {
     };
 
     async getMassMediaById(id) {
-        return await db.query(`select mass_media.id, number, series, mass_media.name, is_active,
+        return await db.query(`select mass_media.id, number, series, to_char(date_registarion, 'YYYY-MM-DD') as date, mass_media.name, is_active,
         surname, midname from 
 	    mass_media inner join persons on mass_media.person_id = persons.id 
 	    where mass_media.id = ${id}`);
@@ -35,15 +41,23 @@ class MassMediaRepository {
     };
 
     async addMassMedia(massMediaData) {
-        return await db.query(`insert into mass_media(number, series, type, name, language, date_registarion, scope_of_distribution,
+       const result =  await db.query(`insert into mass_media (number, series, type, name, language, date_registarion, scope_of_distribution,
             frequency_of_issue, amount, objectives, person_id, who_registered) 
             values (${massMediaData.number}, ${massMediaData.series},
                  '${massMediaData.type.toString()}', '${massMediaData.name.toString()}',
-                 '${massMediaData.language.toString()}', '${massMediaData.date_registration.toString()}',
+                 '${massMediaData.language.toString()}', '${moment().format('L').toString()}',
                  '${massMediaData.scope_of_distribution.toString()}', '${massMediaData.frequency_of_issue.toString()}',
-                 '${massMediaData.amount}', '${massMediaData.objectives.toString()}', (select id from persons where (login = '${massMediaData.login.toString()}')),
-                '${massMediaData.who_registered}')
-        )`);
+                 '${massMediaData.amount}', null, (select id from persons where (login = '${massMediaData.login.toString()}')),
+                 '${massMediaData.login.toString()}')`);
+
+        if (result) {
+            return await db.query(`select id, number, series, type, name, language, to_char(date_registarion, 'YYYY-MM-DD') as date, scope_of_distribution,
+                    frequency_of_issue, amount, objectives, person_id, who_registered
+                from mass_media order by id desc limit 1`);
+        } else {
+            return null
+        }
+        
     };
 
     
@@ -159,9 +173,13 @@ class MassMediaRepository {
     };
 
     async addCreationLog(data) {
-        return await db.query(`insert into logs (type_id, mass_media_id, person_id, date, old_number, old_series, old_type, old_name, old_language, to_char(old_date_registarion, 'YYYY-MM-DD') as old_date_registarion,
+        console.log(data)
+        return await db.query(
+            `insert into logs ( type_id, mass_media_id, person_id, date, old_number, old_series, old_type, old_name, 
+            old_language, old_date_registarion,
         old_scope_of_distribution, old_frequency_of_issue, old_amount, old_objectives, old_who_registered, old_person_id) 
-        values (1, ${data.id}, ${data.person_id}, '${data.date_registarion.toString()}', null, null, null, null, null, null, null, null, null, null, null, null, null)`);
+        values (1, ${data.id}, ${data.person_id}, '${data.date.toString()}', null, null, null, null, null, null, null, 
+        null, null, null, null, null)`);
     };
 
     async addUpdateLog(data) {
