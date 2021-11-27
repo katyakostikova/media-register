@@ -15,14 +15,15 @@ module.exports = {
     },
 
     async getFilteredMassMedias(req, res) {
-        const mass_media = await massMediaRepository.getFilteredMassMedias( req.query.number, req.query.series,
-            req.query.name, req.query.surname, req.query.midname);
+        const mass_media = await massMediaRepository.getFilteredMassMedias(req.query);
+
         const currentPerson = await massMediaRepository.getCurrentPerson();
+
         if (currentPerson.rowCount === 0) {
-            res.render('mass_medias', {mass_media: mass_media.rows, login: "", role: "", isRegistrator: false});
+            res.render('mass_medias', {mass_media: mass_media.result.rows, login: "", role: "", isRegistrator: false});
             return;
         }
-        res.render('mass_medias', {mass_media: mass_media.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
+        res.render('mass_medias', {mass_media: mass_media.result.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор"});
     },
 

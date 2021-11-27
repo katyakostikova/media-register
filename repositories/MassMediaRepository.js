@@ -1,28 +1,96 @@
 const db = require('../db');
-const moment= require('moment') 
+const moment= require('moment')
+var count = 0; 
+
+    function addQueryPart(value, name) {
+        var query = ``;
+        console.log(value)
+        if (value) {
+            if (count != 0) {
+                query+= ` and `;
+            }
+            
+            query+= ` (cast(${name} as text) like '%${value.toString()}%') `
+
+            count++;
+        }
+        return query;
+    }
 
 class MassMediaRepository {
     async getMassMedias() {
         return await db.query('select * from mass_media');
     };
 
-    async getFilteredMassMedias(number, series, name, surname, midname) {
+    async getFilteredMassMedias(vals) {
+        
+        var query = '';
 
-      //  var query = `select * from mass_media where `;
+         query+= addQueryPart(vals.number, 'number');
+         query+= addQueryPart(vals.series, 'series');
+         query+= addQueryPart(vals.status, 'type');
+         query+= addQueryPart(vals.who_registered, 'who_registered');
+         query+= addQueryPart(vals.date_registration, 'date_registarion');
 
-       // if (number) {}
+         query+= addQueryPart(vals.name, 'name');
+         query+= addQueryPart(vals.language, 'language');
+         query+= addQueryPart(vals.scope_of_distribution, 'scope_of_distribution');
+         query+= addQueryPart(vals.frequency_of_issue, 'frequency_of_issue');
+         query+= addQueryPart(vals.amount, 'amount');
+         query+= addQueryPart(vals.objectives, 'objectives');
 
 
-        return await db.query(`select * from mass_media where (\n` +
-            `(cast(series as text) like '%${series.toString()}%') and \n` +
-            `(cast(number as text) like '%${number.toString()}%') and \n` +
-            `(person_id in (\n` +
-            `select id from persons where (\n` +
-            `(name like '%${name.toString()}%') and \n` +
-            `(surname like '%${surname.toString()}%') and \n` +
-            `(midname like '%${midname.toString()}%')\n` +
-            `)\n` +
-            `)))`);
+        var query1 = '';
+        if (count > 0) {
+
+            query1 = `select * from mass_media where (` + query;
+            query = query1
+        } else {
+            query = `select * from mass_media`;
+        }
+
+
+
+        if (vals.firstName ||  vals.surname || vals.midname) {
+
+            var lastChar = '';
+            if (count > 0) {
+                query+= ` and (person_id in (`
+                lastChar = ')';
+            } else {
+                query+= ` where (person_id in (`
+            }
+
+                count = 0;
+             
+
+             var subQuery = `select id from persons where (`;
+
+             subQuery+= addQueryPart(vals.firstName, 'name');
+             subQuery+= addQueryPart(vals.surname, 'surname');
+             subQuery+= addQueryPart(vals.midname, 'midname');
+             subQuery+= `)`
+
+             query+= subQuery + `))` + lastChar;
+        } else {
+            if(count > 0) {
+             query+= `)`;
+            }
+
+        }
+        
+        
+        count = 0;
+
+         
+
+         const result =  await db.query(query);
+
+         var results = {q:vals, result:result };
+
+         console.log(results);
+
+        return results
     };
 
     async getMassMediaById(id) {
