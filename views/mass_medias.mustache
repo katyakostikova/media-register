@@ -34,7 +34,7 @@
 </div>
 <div class="mainDiv">
     <div class="leftPartMainDiv">
-        <p class="mainListP">Список бланків</p>
+        <p class="mainListP">Список ЗМІ та ІА</p>
         <div class="scrollableDocsDiv">
             {{#forms}}
                 <div>
@@ -47,12 +47,12 @@
                 </div>
             {{/forms}}
             {{^forms}}
-                <p class="mainListP borderedP">Бланків з такими параметрами не знайдено</p>
+                <p class="mainListP borderedP">ЗМІ або ІА з такими параметрами не знайдено</p>
             {{/forms}}
         </div>
         {{#isRegistrator}}
             <div class="aContainerDiv">
-                <a href="/forms/new" id="addA">Додати бланк</a>
+                <a href="/forms/new" id="addA">Додати ЗМІ або ІА</a>
             </div>
         {{/isRegistrator}}
     </div>
@@ -64,28 +64,28 @@
                
                     <p>Дата держ. реєстрації</p>
                     <div>
-                        <input class="dateInput" type="date" name="usage_date"/>
+                        <input class="dateInput" type="date" name="date_registration"/>
                     </div>
                 </div>
                 <div class="tileDive">
                    
                     <p>Серія свідоцтва</p>
                     <div>
-                        <input class="seriesInput" type="number" placeholder="0" name="series"/>
+                        <input class="seriesInput" type="number" placeholder="12" name="series"/>
                     </div>
                 </div>
                 <div class="tileDive">
                 
                     <p>Номер свідоцтва</p>
                     <div>
-                        <input class="numberInput" type="number" placeholder="0" name="number"/>
+                        <input class="numberInput" type="number" placeholder="1235" name="number"/>
                     </div>
                 </div>
                  <div class="tileDive">
                  
                     <p>Орган, що зареєстрував</p>
                     <div>
-                        <input class="numberInput" type="number" placeholder="0" name="number"/>
+                        <input class="numberInput" type="number" placeholder="0" name="who_registered"/>
                     </div>
                 </div>
 
@@ -93,10 +93,10 @@
                   
                     <p>Засновник</p>
                     <div class="initialsDiv">
-                        <input class="registeredOnInput" type="text" placeholder="Ім'я: Іван" name="name"/>
                         <input class="registeredOnInput" type="text" placeholder="Прізвище: Іванов" name="surname"/>
+                        <input class="registeredOnInput" type="text" placeholder="Ім'я: Іван" name="name"/>
                         <input class="registeredOnInput" type="text" placeholder="По-батькові: Іванович"
-                               name="middle_name"/>
+                               name="midname"/>
                     </div>
                 </div>
                 <div class="tileDive">
@@ -111,6 +111,49 @@
                         </select>
                     </div>
                 </div>
+                <div class="tileDive">
+                
+                    <p>Назва видання</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Журнал &quot;Мрія&quot;" name="name"/>
+                    </div>
+                </div>
+
+                <div class="tileDive">
+                
+                    <p>Мова видання</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Українська" name="language"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                
+                    <p>Сфера розповсюдження</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Місцева" name="scope_of_distribution"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                
+                    <p>Періодичність випуску</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Кожен місяць" name="frequency_of_issue"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                
+                    <p>Обсяг</p>
+                    <div>
+                        <input class="numberInput" type="number" placeholder="1" name="amount"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                
+                    <p>Програмні цілі</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Інформаційний" name="objectives"/>
+                    </div>
+                </div>
                 <div>
                     <input type="submit" value="Пошук">
                 </div>
@@ -118,7 +161,7 @@
         </form>
     </div>
 </div>
-{{> footer}}
+<!-- {{> footer}} -->
 </body>
 <!--<script>-->
 <!--    window.onload(() => {-->
