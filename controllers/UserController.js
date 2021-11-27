@@ -20,6 +20,14 @@ module.exports = {
        
     },
 
+    async getRegistrators(req, res) {
+    	console.log("Registraort here ")
+        const registrators = await massMediaRepository.getRegistrators();
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('registrators', {registrators: registrators.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор"});
+    },
+
     /*
 {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: false}
