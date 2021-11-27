@@ -5,80 +5,77 @@
 {{> header}}
 <div class="menuDiv leftDiv">
     <div class="authImgDiv">
-        <a href="/">
+        <a href="/mass_medias/all">
             <img id="backImg" src="/images/back.png" alt="back">
         </a>
     </div>
 </div>
-<!--<div class="menuDiv rightDiv">-->
-<!--    {#login}}-->
-<!--        <div class="roleDiv">-->
-<!--            <p id="userDataP">{role}}: {login}}</p>-->
-<!--        </div>-->
-<!--        <div class="authImgDiv">-->
-<!--            <a href="/" id="logoutA">-->
-<!--                <img id="authImg" src="/images/logout3.png" alt="logout">-->
-<!--            </a>-->
-<!--        </div>-->
-<!--    {/login}}-->
-<!--    {^login}}-->
-<!--        <div class="roleDiv">-->
-<!--            <p id="userDataP">Користувач</p>-->
-<!--        </div>-->
-<!--        <div class="authImgDiv">-->
-<!--            <a href="/auth/login">-->
-<!--                <img id="authImg" src="/images/user.png" alt="login">-->
-<!--            </a>-->
-<!--        </div>-->
-<!--    {/login}}-->
-<!--</div>-->
 <div class="mainDiv">
-    <div class="rightPartMainDiv">
-        <p class="mainListP">Новий бланк</p>
-        <form action="/forms" , method="POST" , enctype="multipart/form-data">
+    <div class="rightPartMainDiv newMassMedia" id="withoutLineDiv">
+        <p class="mainListP">Нове ЗМІ або ІА</p>
+        <form action="/mass_medias" , method="POST" , enctype="multipart/form-data">
             <div class="filtersMainDiv">
                 <div class="tileDive">
-                    <img src="/images/calendar.png" alt="date of usage">
-                    <p>Дата використання</p>
+                    <p>Вид видання</p>
                     <div>
-                        <input class="dateInput" type="date" name="usage_date"/>
+                        <select class="statusInput" name="type">
+                            <option value="">-- вид --</option>
+                            <option value="ЗМІ">ЗМІ</option>
+                            <option value="ІА">ІА</option>
+                            
+                        </select>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/series.png" alt="series">
                     <p>Серія</p>
                     <div>
                         <input class="seriesInput" type="number" placeholder="0" name="series"/>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/number.png" alt="number">
                     <p>Номер</p>
                     <div>
                         <input class="numberInput" type="number" placeholder="0" name="number"/>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/user.png" alt="person">
-                    <p>На кого зарестровано бланк</p>
+                    <p>Назва</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Газета &quot;Новини&quot;" name="name"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Мова видання</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Українська" name="language"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Сфера розповсюдження</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Місцевий" name="scope_of_distribution"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Періодичність випуску</p>
+                    <div>
+                        <input class="registeredOnInput" type="text" placeholder="Кожен місяць" name="frequency_of_issue"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>Обсяг</p>
+                    <div>
+                        <input class="numberInput" type="number" placeholder="1" name="amount"/>
+                    </div>
+                </div>
+                <div class="tileDive">
+                    <p>На кого зарестровано</p>
                     <div>
                         <select class="statusInput" name="login">
                             <option value="">-- логін --</option>
                             {{#logins}}
                                 <option value="{{login}}">{{login}}</option>
                             {{/logins}}
-                        </select>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <img src="/images/status.png" alt="document status">
-                    <p>Статус бланка</p>
-                    <div>
-                        <select class="statusInput" name="status">
-                            <option value="">-- статус --</option>
-                            {{#statuses}}
-                                <option value="{{status}}">{{status}}</option>
-                            {{/statuses}}
                         </select>
                     </div>
                 </div>
