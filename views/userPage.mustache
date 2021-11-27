@@ -47,10 +47,10 @@
                             {{#isRegOnPage}}
                                 <div class="registratorEditDiv">
                                     {{^is_active}}
-                                        <button><a href="/forms/activate/{{id}}">Активувати</a></button>
+                                        <button><a href="/users/activate/{{id}}">Активувати</a></button>
                                     {{/is_active}}
                                     {{#is_active}}
-                                        <button><a href="/forms/deactivate/{{id}}">Деактивувати</a></button>
+                                        <button><a href="/users/deactivate/{{id}}">Деактивувати</a></button>
                                     {{/is_active}}
                                 </div>
                             {{/isRegOnPage}}
@@ -84,5 +84,5 @@
 </div>
 {{> footer}}
 </body>
-<script src="/javascripts/logoutScript.js"></script>
+<script src="/javascripts/homeScript.js"></script>
 </html>
