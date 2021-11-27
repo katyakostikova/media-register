@@ -35,77 +35,45 @@
 <div class="mainDiv">
     <div class="leftPartMainDiv">
         <div class="formDiv">
-            {{#mass_media}}
+            {{#form}}
                 <div>
                     <div>
-                        <p class="firstP">={{type}}&nbsp;&nbsp;№{{number}}</p>
+                        <img src="/images/document.png" alt="document">
+                        <p class="firstP">Бланк&nbsp;&nbsp;№{{number}}</p>
                         <p>Серія&nbsp;&nbsp;№{{series}}</p>
                     </div>
                 </div>
-            {{/mass_media}}
+            {{/form}}
         </div>
     </div>
     <div class="rightPartMainDiv">
-            {{#mass_media}}
+            {{#form}}
             <div class="filtersMainDiv">
                 <div class="tileDive">
-                    <p>Дата реєстрації</p>
+                    <img src="/images/calendar.png" alt="date of usage">
+                    <p>Дата використання</p>
                     <div>
-                        <p>{{date_registarion}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Назва</p>
-                    <div>
-                        <p>{{name}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Мова видання</p>
-                    <div>
-                        <p>{{language}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Cфера розповсюдження</p>
-                    <div>
-                        <p>{{scope_of_distribution}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Періодичність випуску / обсяг</p>
-                    <div>
-                        <p>{{frequency_of_issue}} / {{amount}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Тематична спрямованість (програмні цілі)</p>
-                    <div>
-                        <p>{{objectives}}</p>
+                        <p>{{usage_date}}</p>
                     </div>
                 </div>
                 <div class="tileDive bigDiv">
-                    <p>Належить</p>
+                    <img src="/images/register.png" alt="registered on">
+                    <p>Зареєстровано на</p>
                     <div class="initialsDiv">
                         <p>{{name}}</p>
                         <p>{{surname}}</p>
-                        <p>{{midname}}</p>
-                    </div>
-                </div>
-                <div class="tileDive">
-                    <p>Ким зареэстровано</p>
-                    <div>
-                        <p>{{who_registered}}</p>
+                        <p>{{middle_name}}</p>
                     </div>
                 </div>
                 <div class="tileDive tileDive2">
-                    <p>Стан</p>
+                    <img src="/images/status.png" alt="document status">
+                    <p>Статус бланка</p>
                     <div>
-                        <p>{{is_active}}</p>
+                        <p>{{status}}</p>
                     </div>
                 </div>
             </div>
-            {{/mass_media}}
+            {{/form}}
     </div>
 </div>
 {{> footer}}
