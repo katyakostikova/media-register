@@ -12,7 +12,19 @@ module.exports = {
         const foundations = await authRepository.getFoundations();
         const positions = await authRepository.getPositions();
         const passAuth = await authRepository.getPassportAuth();
-        res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+
+
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        if (currentPerson.rowCount === 0) {
+            res.render('registration', {foundations: foundations.rows, positions: positions.rows,
+                passAuth: passAuth.rows, login: "", role: "", isRegistrator: false});
+            return;
+        }
+
+        res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, id: currentPerson.rows[0].id,
+            role: currentPerson.rows[0].role === "Адміністратор" ? "registrator" : ""});
+
+       // res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
     },
 
      async addAdmin(req, res) {
