@@ -133,7 +133,7 @@ class MassMediaRepository {
         await db.query(`update mass_media set number = ${mass_media.number}, series = ${mass_media.series}, type = '${massMediaData.type.toString()}', 
         name = '${massMediaData.name.toString()}', language = '${massMediaData.language.toString()}', date_registarion = '${massMediaData.date_registarion.toString()}', 
         scope_of_distribution = '${massMediaData.scope_of_distribution.toString()}', frequency_of_issue = '${massMediaData.frequency_of_issue.toString()}', 
-        amount = ${massMediaData.amount}, objectives = '${massMediaData.objectives.toString()}', 
+        amount = ${massMediaData.amount}, objectives = null, 
         person_id = (select id from persons where (login = '${massMediaData.login.toString()}')),
         who_registered = '${massMediaData.who_registered.toString()}'`); //where id=${id}
 
@@ -147,7 +147,7 @@ class MassMediaRepository {
         update temp set old_number = ${massMediaData.old_number}, old_series = ${massMediaData.old_series}, old_type = ${massMediaData.old_type},
         old_name = ${massMediaData.old_name}, old_language = ${massMediaData.old_language}, old_date_registarion = ${massMediaData.old_date_registarion},
         old_scope_of_distribution = ${massMediaData.old_scope_of_distribution}, old_frequency_of_issue = ${massMediaData.old_frequency_of_issue},
-        old_amount = ${massMediaData.old_amount}, old_objectives = ${massMediaData.old_objectives}, who_registered=${massMediaData.who_registered},
+        old_amount = ${massMediaData.old_amount}, old_objectives = null, who_registered=${massMediaData.who_registered},
         old_login = '${massMediaData.old_login.toString()}', update_date = '${moment().format('L').toString()}'`);
 
        

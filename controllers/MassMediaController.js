@@ -83,4 +83,11 @@ module.exports = {
         res.render('logs', {logs: logs.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows});
     },
+
+    async updateMassMedia(req, res) {
+        const updatedMassMedia = await massMediaRepository.editMassMedia(req.body, req.params.id);
+        const log = await massMediaRepository.addUpdateLog(updatedMassMedia.rows[0]);
+        const mass_media = await massMediaRepository.getMassMediaById(req.params.id);
+        res.redirect(`/mass_medias/${mass_media.rows[0].id}`);
+    },
 }

@@ -9,4 +9,5 @@ router.get('/', massMediaController.getHomePage);
 router.post('/', massMediaController.addMassMedia);
 router.get('/allLogs', massMediaController.getAllLogs);
 router.get('/filteredLogs', massMediaController.getFilteredLogs);
+router.post('/:id/edit', massMediaController.updateMassMedia);
 module.exports = router;
