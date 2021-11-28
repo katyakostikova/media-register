@@ -15,7 +15,12 @@ module.exports = {
         const currentPerson = await massMediaRepository.getCurrentPerson();
         console.log(currentPerson);
         res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
-            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: false}
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор",
+            view: false,
+            isUser : currentPerson.rows[0].role === "Користувач",
+            isUserOnPage : currentPerson.rows[0].role === "Користувач",
+            isAdmin: currentPerson.rows[0].role === "Адміністратор"
+        }
 );
        
     },
@@ -40,7 +45,12 @@ module.exports = {
         const user = await massMediaRepository.getUserById(req.params.id);
         const currentPerson = await massMediaRepository.getCurrentPerson();
         res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
-            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: true});
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", 
+            view: true,
+            isUser : currentPerson.rows[0].role === "Користувач",
+            isUserOnPage : currentPerson.rows[0].role === "Користувач",
+            isAdmin: currentPerson.rows[0].role === "Адміністратор"
+        });
     },
 
     async viewUser(req, res) {
@@ -49,7 +59,9 @@ module.exports = {
         res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", 
             view: true,
-            isUser : true
+            isUser : currentPerson.rows[0].role === "Користувач",
+            isUserOnPage : currentPerson.rows[0].role === "Користувач",
+            isAdmin: currentPerson.rows[0].role === "Адміністратор"
         });
     },
 

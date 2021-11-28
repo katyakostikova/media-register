@@ -57,9 +57,11 @@
                         {{/isRegistrator}}
 
                          {{#isUser}}
-                                <div class="registratorEditDiv">
-                                        <button><a href="/users/delete/{{id}}">Видалити</a></button> 
-                                </div>
+                                {{^isUserOnPage}}
+                                    <div class="registratorEditDiv">
+                                            <button><a href="/users/delete/{{id}}">Видалити</a></button> 
+                                    </div>
+                                {{/isUserOnPage}}
                         {{/isUser}}
                     </div>
                 </div>
@@ -84,6 +86,7 @@
                     </div>
                  {{/isUser}}
                 {{^isRegistrator}}
+                 {{^isUser}}
                     <div class="userAction">
                         <a class="userActionButton" href="/users/registrators">Перегляд існуючих Реєстраторів</a>
                     </div>
@@ -93,6 +96,7 @@
                     <div class="userAction">
                         <a class="userActionButton" href="/mass_medias/allLogs">Журнал дій</a>
                     </div>
+                     {{/isUser}}
                 {{/isRegistrator}}
             </div>
         </div>
