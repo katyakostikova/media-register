@@ -39,7 +39,7 @@
             {{#logs}}
                 <div>
                     {{^is_edited}}
-                        <a href="/mass_medias/created/{{form_id}}">
+                        <a href="/mass_medias/{{mass_media_id}}">
                             <div>
                                 <p>Дія:&nbsp;&nbsp;{{type}}</p>
                                 <p>Дата зміни/створення:&nbsp;&nbsp;{{date}}</p>
@@ -50,7 +50,7 @@
                         </a>
                     {{/is_edited}}
                     {{#is_edited}}
-                        <a href="/mass_medias/updated/{{id}}">
+                        <a href="/mass_medias/{{mass_media_id}}">
                             <div>
                                 <p>Дія:&nbsp;&nbsp;{{type}}</p>
                                 <p>Дата зміни/створення:&nbsp;&nbsp;{{date}}</p>
