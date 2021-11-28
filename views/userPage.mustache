@@ -55,6 +55,12 @@
                                 </div>
                             {{/isRegOnPage}}
                         {{/isRegistrator}}
+
+                         {{#isUser}}
+                                <div class="registratorEditDiv">
+                                        <button><a href="/users/delete/{{id}}">Видалити</a></button> 
+                                </div>
+                        {{/isUser}}
                     </div>
                 </div>
             {{/user}}

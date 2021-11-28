@@ -69,6 +69,22 @@ module.exports = {
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: true});
     },
 
+
+    async deleteUser(req, res) {
+        const deleted = await massMediaRepository.deleteUser(req.params.id);
+        if (deleted) {
+           res.redirect('/users/users')
+        } else {
+            const user = await massMediaRepository.getUserById(req.params.id);
+            const currentPerson = await massMediaRepository.getCurrentPerson();
+            res.render('userPage', {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role,
+                isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", 
+                view: true,
+                isUser : true
+            });
+        }
+    },
+
     /*
 {user: user.rows[0], login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор", isRegOnPage: user.rows[0].role === "Реєстратор", view: false}

@@ -191,6 +191,10 @@ class MassMediaRepository {
         return await db.query(`update persons set is_active = false where (id = ${id})`);
     };
 
+    async deleteUser(id) {
+        return await db.query(`delete from persons where (id = ${id})`);
+    };
+
     async getAllLogs() {
         return await db.query(`select id, idc, (type_id = 2) as is_edited, mass_media_id, to_char(date, 'YYYY-MM-DD') as date, old_number, old_series, old_type, old_name, old_language, to_char(old_date_registarion, 'YYYY-MM-DD') as old_date_registarion,
         old_scope_of_distribution, old_frequency_of_issue, old_amount, old_objectives, old_who_registered, number, series, type, login from (select * from logs
