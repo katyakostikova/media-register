@@ -43,9 +43,11 @@
                             </p>
                             <p class="massMediaInfoP">Номер: №{{ number }}</p>
                             <p class="massMediaInfoP">Серія&nbsp;&nbsp;№{{ series }}</p>
+                            {{#isRegistrator}}
                             <div class="aContainerDiv">
                                 <a href="/mass_medias/{{id}}/edit" id="addA">Редагувати {{ type }}</a>
                             </div>
+                            {{/isRegistrator}}
                         </div>
                     </div>
                     {{/mass_media}}
