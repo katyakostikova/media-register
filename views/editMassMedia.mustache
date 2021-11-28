@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> head}}
+    <body>
+        {{> header}}
+        <div class="menuDiv leftDiv">
+            <div class="authImgDiv">
+                {{#mass_media}}
+                <a href="/mass_medias/{{ id }}">
+                    <img id="backImg" src="/images/back.png" alt="back" />
+                </a>
+                {{/mass_media}}
+            </div>
+        </div>
+        <div class="menuDiv rightDiv">
+            {{#login}}
+            <div class="roleDiv">
+                <a href="/mass_medias/profile/{{ id }}" id="userDataP"
+                    >{{ role }}: {{ login }}</a
+                >
+            </div>
+            <div class="authImgDiv">
+                <a href="/" id="logoutA">
+                    <img id="authImg" src="/images/logout3.png" alt="logout" />
+                </a>
+            </div>
+            {{/login}}
+            {{^login}}
+            <div class="roleDiv">
+                <p id="userDataP">Користувач</p>
+            </div>
+            <div class="authImgDiv">
+                <a href="/auth/login">
+                    <img id="authImg" src="/images/user.png" alt="login" />
+                </a>
+            </div>
+            {{/login}}
+        </div>
+        <div class="mainDiv">
+            <div class="leftPartMainDiv">
+                <p class="mainListP">Редагування ЗМІ або ІА</p>
+                <div class="formDiv">
+                    {{#mass_media}}
+                    <div>
+                        <div>
+                            <img src="/images/document.png" alt="document" />
+                        </div>
+                    </div>
+                    {{/mass_media}}
+                </div>
+            </div>
+            <div class="rightPartMainDiv">
+                {{#mass_media}}
+                <form
+                    action="/forms/{{ id }}/edit"
+                    ,
+                    method="post"
+                    ,
+                    enctype="multipart/form-data"
+                >
+                    <div class="filtersMainDiv">
+                        <div class="tileDive">
+                            <p>Серія</p>
+                            <div>
+                                <input
+                                    class="seriesInput"
+                                    type="number"
+                                    placeholder="0"
+                                    name="series"
+                                    value="{{ series }}"
+                                />
+                                <input
+                                    name="old_series"
+                                    value="{{ series }}"
+                                    type="hidden"
+                                />
+                                <input
+                                    name="login"
+                                    value="{{ form_login }}"
+                                    type="hidden"
+                                />
+                                <input
+                                    name="old_login"
+                                    value="{{ form_login }}"
+                                    type="hidden"
+                                />
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Номер</p>
+                            <div>
+                                <input
+                                    class="numberInput"
+                                    type="number"
+                                    placeholder="0"
+                                    name="number"
+                                    value="{{ number }}"
+                                />
+                                <input
+                                    name="old_number"
+                                    value="{{ number }}"
+                                    type="hidden"
+                                />
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Назва</p>
+                            <div>
+                                <input
+                                    class="registeredOnInput"
+                                    type="text"
+                                    placeholder="Газета &quot;Новини&quot;"
+                                    name="name"
+                                    value="{{ name }}"
+                                />
+                                <input
+                                    name="old_name"
+                                    value="{{ name }}"
+                                    type="hidden"
+                                />
+                            </div>
+                        </div>
+                        <div class="tileDive tileDive2">
+                            <p>Вид видання</p>
+                            <div>
+                                <select class="statusInput" name="type">
+                                    <option value="">-- вид --</option>
+                                    <option value="ЗМІ">ЗМІ</option>
+                                    <option value="ІА">ІА</option>
+                                </select>
+                                <input
+                                    name="old_type"
+                                    value="{{ type }}"
+                                    type="hidden"
+                                />
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Мова видання</p>
+                            <div>
+                                <input class="registeredOnInput" type="text" placeholder="Українська" name="language" value="{{language}}"/>
+                                <input name="old_language" value="{{language}}" type="hidden">
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <img src="/images/calendar.png" alt="date of usage">
+                            <p>Дата реєстрації</p>
+                            <div>
+                                <input class="dateInput" type="date" name="date_registarion" value="{{date_registarion}}"/>
+                                {{#old_date_exists}}
+                                <input name="old_date_registarion" value="{{date_registarion}}" type="hidden">
+                                {{/old_date_exists}}
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Сфера розповсюдження</p>
+                            <div>
+                                <input class="registeredOnInput" type="text" placeholder="Місцевий" name="scope_of_distribution" value="{{scope_of_distribution}}"/>
+                                <input name="old_scope_of_distribution" value="{{scope_of_distribution}}" type="hidden">
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Періодичність випуску</p>
+                            <div>
+                                <input class="registeredOnInput" type="text" placeholder="Кожен місяць" name="frequency_of_issue" value="{{frequency_of_issue}}"/>
+                                <input name="old_frequency_of_issue" value="{{frequency_of_issue}}" type="hidden">
+                            </div>
+                        </div>
+                        <div class="tileDive">
+                            <p>Обсяг</p>
+                            <div>
+                                <input class="numberInput" type="number" placeholder="1" name="amount" value="{{amount}}"/>
+                                <input name="old_amount" value="{{amount}}" type="hidden">
+                            </div>
+                        </div>
+                        <div>
+                            <input
+                                type="submit"
+                                value="Відредагувати"
+                                id="editInput"
+                            />
+                        </div>
+                    </div>
+                </form>
+                {{/mass_media}}
+            </div>
+        </div>
+        {{> footer}}
+    </body>
+    <script src="/javascripts/logoutScript.js"></script>
+</html>
