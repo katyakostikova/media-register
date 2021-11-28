@@ -264,10 +264,12 @@ return data;
     async getFilteredLogs(date, login, type) {
         let boolDate = false;
         let boolType = false;
+        let boolLogin = false;
 
         if (date.toString().length === 0) boolDate = true;
         if (type.toString().length === 0) boolType = true;
-        return await db.query(`select * from 
+        if (login.toString().length === 0) boolLogin = true;
+        let d = `select * from 
         (select id, idc, (type_id = 2) as is_edited, mass_media_id, to_char(date, 'YYYY-MM-DD') as date, old_number, old_series, old_type, old_name, old_language, to_char(old_date_registarion, 'YYYY-MM-DD') as old_date_registarion,
         old_scope_of_distribution, old_frequency_of_issue, old_amount, old_objectives, old_who_registered,
         number, series, type, login from (select * from logs
@@ -275,8 +277,10 @@ return data;
         inner join (select id as idb, type from types) as types on logs.type_id = types.idb
         inner join (select id as idc, login from persons) as persons on logs.person_id = persons.idc) as all_data) as a
         where ((${boolDate} or date = '${date.toString()}')
-        and (login like '%${login.toString()}%')
-        and (${boolType} or (type = '${type}')))`);
+        and (login like '%${login.toString()}%' or ${boolLogin})
+        and (${boolType} or (type = '${type}')))`
+        console.log(d)
+        return await db.query(d);
     };
 
     async deleteMassMedia(id) {

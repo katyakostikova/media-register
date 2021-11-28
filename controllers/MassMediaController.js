@@ -80,17 +80,24 @@ module.exports = {
     async getAllLogs(req, res) {
         const logs = await massMediaRepository.getAllLogs();
         const types = await massMediaRepository.getTypes();
+        const logins = await massMediaRepository.getLogins();
         const currentPerson = await massMediaRepository.getCurrentPerson();
         res.render('logs', {logs: logs.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
-            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows, isEdited: false});
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows, isEdited: false,
+            logins:logins.rows
+        });
     },
 
     async getFilteredLogs(req, res) {
         const logs = await massMediaRepository.getFilteredLogs(req.query.date, req.query.login, req.query.type);
         const types = await massMediaRepository.getTypes();
+          const logins = await massMediaRepository.getLogins();
         const currentPerson = await massMediaRepository.getCurrentPerson();
         res.render('logs', {logs: logs.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
-            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows});
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows
+,
+            logins:logins.rows
+        });
     },
 
     async updateMassMedia(req, res) {

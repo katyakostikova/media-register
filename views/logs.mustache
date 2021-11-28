@@ -5,7 +5,7 @@
 {{> header}}
 <div class="menuDiv leftDiv">
     <div class="authImgDiv">
-        <a href="/mass_medias/profile/{{id}}">
+        <a href="/users/{{id}}">
             <img id="backImg" src="/images/back.png" alt="back">
         </a>
     </div>
@@ -84,7 +84,12 @@
                     <img src="/images/user.png" alt="user">
                     <p>Ким змінено/створено</p>
                     <div>
-                        <input class="loginInput" type="text" placeholder="0" name="login"/>
+                        <select class="statusInput" name="login">
+                            <option value="">-- логін --</option>
+                            {{#logins}}
+                                <option value="{{login}}">{{login}}</option>
+                            {{/logins}}
+                        </select>
                     </div>
                 </div>
                 <div class="tileDive">
