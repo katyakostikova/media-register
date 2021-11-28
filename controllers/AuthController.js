@@ -27,6 +27,25 @@ module.exports = {
        // res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
     },
 
+    async getRegDataUser(req, res) {
+        const foundations = await authRepository.getFoundations();
+        const positions = await authRepository.getPositions();
+        const passAuth = await authRepository.getPassportAuth();
+
+
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        if (currentPerson.rowCount === 0) {
+            res.render('registration', {foundations: foundations.rows, positions: positions.rows,
+                passAuth: passAuth.rows, login: "", role: "", isRegistrator: false});
+            return;
+        }
+
+        res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, id: currentPerson.rows[0].id,
+            role: "user"});
+
+       // res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+    },
+
      async addAdmin(req, res) {
          const error = await authRepository.getErrorMessage(req.body, 2);
          if (error !== "") {
@@ -64,7 +83,7 @@ module.exports = {
          }
      },
 
-//TODO need to change form and have function to generate login and password using email and pib of user
+//TODO 
     async addUser(req, res) {
          const error = await authRepository.getErrorMessage(req.body, 1);
          if (error !== "") {

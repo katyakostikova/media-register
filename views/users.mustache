@@ -12,21 +12,21 @@
 </div>
 <div class="mainDiv">
     <div class="rightPartMainDiv registrators" id="withoutLineDiv">
-        <p class="mainListP">Перегляд Користувачів</p>
+        <p class="mainListP">Перегляд Реєстраторів</p>
         <div class="scrollableDocsDiv" id="style-1">
-            {{#users}}
+            {{#registrators}}
                 <div>
-                    <a href="/users/user/{{id}}">
+                    <a href="/users/registrators/{{id}}">
                         <div>
                             <p>&nbsp;&nbsp;{{login}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{email}}</p>
                         </div>
                     </a>
                 </div>
-            {{/users}}
-            {{^users}}
-                <p class="mainListP borderedP">Користувачів не знайдено</p>
-            {{/users}}
+            {{/registrators}}
+            {{^registrators}}
+                <p class="mainListP borderedP">Реєстраторів не знайдено</p>
+            {{/registrators}}
         </div>
     </div>
 </div>
