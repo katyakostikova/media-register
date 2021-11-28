@@ -1,81 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-{{> head}}
-<body>
-{{> header}}
-<div class="menuDiv leftDiv">
-    <div class="authImgDiv">
-        <a href="/">
-            <img id="backImg" src="/images/back.png" alt="back">
-        </a>
-    </div>
-</div>
-<div class="menuDiv rightDiv">
-    {{#login}}
-        <div class="roleDiv">
-            <p id="userDataP">{{role}}: {{login}}</p>
+    {{> head}}
+    <body>
+        {{> header}}
+        <div class="menuDiv leftDiv">
+            <div class="authImgDiv">
+                <a href="/">
+                    <img id="backImg" src="/images/back.png" alt="back" />
+                </a>
+            </div>
         </div>
-        <div class="authImgDiv">
-            <a href="/" id="logoutA">
-                <img id="authImg" src="/images/logout3.png" alt="logout">
-            </a>
+        <div class="menuDiv rightDiv">
+            {{#login}}
+            <div class="roleDiv">
+                <p id="userDataP">{{ role }}: {{ login }}</p>
+            </div>
+            <div class="authImgDiv">
+                <a href="/" id="logoutA">
+                    <img id="authImg" src="/images/logout3.png" alt="logout" />
+                </a>
+            </div>
+            {{/login}}
+            {{^login}}
+            <div class="roleDiv">
+                <p id="userDataP">Користувач</p>
+            </div>
+            <div class="authImgDiv">
+                <a href="/auth/login">
+                    <img id="authImg" src="/images/user.png" alt="login" />
+                </a>
+            </div>
+            {{/login}}
         </div>
-    {{/login}}
-    {{^login}}
-        <div class="roleDiv">
-            <p id="userDataP">Користувач</p>
-        </div>
-        <div class="authImgDiv">
-            <a href="/auth/login">
-                <img id="authImg" src="/images/user.png" alt="login">
-            </a>
-        </div>
-    {{/login}}
-</div>
-<div class="mainDiv">
-    <div class="leftPartMainDiv">
-        <div class="formDiv">
-            {{#mass_media}}
-                <div>
+        <div class="mainDiv">
+            <div class="leftPartMainDiv">
+                <div class="formDiv">
+                    {{#mass_media}}
                     <div>
-                        <img src="/images/document.png" alt="document">
-                        <p class="firstP">Бланк&nbsp;&nbsp;№{{number}}</p>
-                        <p>Серія&nbsp;&nbsp;№{{series}}</p>
+                        <div>
+                            <p class="massMediaInfoP">
+                                Тип (ЗМІ або ІА): {{ type }}&nbsp;&nbsp;
+                            </p>
+                            <p class="massMediaInfoP">Номер: №{{ number }}</p>
+                            <p class="massMediaInfoP">Серія&nbsp;&nbsp;№{{ series }}</p>
+                        </div>
                     </div>
-                </div>
-            {{/mass_media}}
-        </div>
-    </div>
-    <div class="rightPartMainDiv">
-            {{#mass_media}}
-            <div class="filtersMainDiv">
-                <div class="tileDive">
-                    <img src="/images/calendar.png" alt="date of usage">
-                    <p>Дата використання</p>
-                    <div>
-                        <p>{{date}}</p>
-                    </div>
-                </div>
-                <div class="tileDive bigDiv">
-                    <img src="/images/register.png" alt="registered on">
-                    <p>Зареєстровано на</p>
-                    <div class="initialsDiv">
-                        <p>{{name}}</p>
-                        <p>{{surname}}</p>
-                        <p>{{midname}}</p>
-                    </div>
-                </div>
-                <div class="tileDive tileDive2">
-                    <img src="/images/status.png" alt="document status">
-                    <p>Статус бланка</p>
-                    <div>
-                        <p>{{is_active}}</p>
-                    </div>
+                    {{/mass_media}}
                 </div>
             </div>
-            {{/mass_media}}
-    </div>
-</div>
-{{> footer}}
-</body>
+            <div class="rightPartMainDiv">
+                {{#mass_media}}
+                <div class="filtersMainDiv">
+                    <div class="tileDive">
+                        <p>Дата реєстрації</p>
+                        <div>
+                            <p>{{ date }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive">
+                        <p>Назва</p>
+                        <div>
+                            <p>{{ name }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive">
+                        <p>Мова видання</p>
+                        <div>
+                            <p>{{ language }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive">
+                        <p>Cфера розповсюдження</p>
+                        <div>
+                            <p>{{ scope_of_distribution }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive">
+                        <p>Періодичність випуску / обсяг</p>
+
+                        <p>{{ frequency_of_issue }} / {{ amount }}</p>
+                    </div>
+                    <!-- <div class="tileDive">
+                        <p>Тематична спрямованість</p>
+                        <div>
+                            <p>{{ objectives }}</p>
+                        </div>
+                    </div> -->
+                    <div class="tileDive bigDiv">
+                        <p>Належить</p>
+                        <div class="initialsDiv">
+                            <p>{{ pername }}</p>
+                            <p>{{ surname }}</p>
+                            <p>{{ midname }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive">
+                        <p>Ким зареэстровано</p>
+                        <div>
+                            <p>{{ who_registered }}</p>
+                        </div>
+                    </div>
+                    <div class="tileDive tileDive2">
+                        <p>Стан</p>
+                        <div>
+                            <p>{{ is_active }}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/mass_media}}
+            </div>
+        </div>
+        {{> footer}}
+    </body>
 </html>
