@@ -57,6 +57,19 @@ class AuthRepository {
         );
     };
 
+    async addUser(adminData) {
+        console.log(adminData);
+       return await db.query(`insert into passports (number, series, issue_date, issued_by) values (${adminData.passport_number}, ${adminData.series === undefined ? null : adminData.series}, '${adminData.passport_date.toString()}', (select id from passport_authorities where number = ${adminData.passport_issue}));
+       insert into persons (
+       name, surname, midname, passport_id, birthday, taxnum, login, password, foundation_id, position_id, is_active, role, email
+       ) values (
+       '${adminData.name.toString()}', '${adminData.surname.toString()}', '${adminData.midname.toString()}', (select id from passports where number = '${adminData.passport_number.toString()}'), '${adminData.birthday.toString()}', ${adminData.taxnum}, 
+       '${adminData.login.toString()}', '${md5(adminData.password).toString()}', (select id from foundations where name = '${adminData.foundations.toString()}'), (select id from positions where name = '${adminData.position.toString()}'), 
+       true, 'Коистувач', '${adminData.email.toString()}')
+       `
+       );
+   };
+
     async getErrorMessage(data, type) {
         if (type === 1) {
             console.log(data);
