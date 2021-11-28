@@ -7,5 +7,6 @@ router.get('/filtered', massMediaController.getFilteredMassMedias);
 router.get('/:id', massMediaController.getMassMediaById);
 router.get('/', massMediaController.getHomePage);
 router.post('/', massMediaController.addMassMedia);
-
+router.get('/allLogs', massMediaController.getAllLogs);
+router.get('/filteredLogs', massMediaController.getFilteredLogs);
 module.exports = router;

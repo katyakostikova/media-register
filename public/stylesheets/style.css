@@ -609,3 +609,13 @@ a {
     font-size: 30px;
     font-weight: bold;
 }
+
+.rightPartMainDiv.registrators {
+    border: 0px;
+}
+
+.registratorEditDiv {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}

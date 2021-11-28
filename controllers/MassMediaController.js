@@ -1,8 +1,6 @@
 const MassMediaRepository = require('../repositories/MassMediaRepository');
 const massMediaRepository = new MassMediaRepository();
-const moment= require('moment')
 
-//@ОСТАНОВИЛАСЬ ВНИЗУ@
 module.exports = {
     async getMassMedias(req, res) {
         const mass_media = await massMediaRepository.getMassMedias();
@@ -67,5 +65,21 @@ module.exports = {
         }
         res.render('mass_medias', {mass_media: mass_media.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
             isRegistrator: currentPerson.rows[0].role === "Реєстратор"});
+    },
+
+    async getAllLogs(req, res) {
+        const logs = await massMediaRepository.getAllLogs();
+        const types = await massMediaRepository.getTypes();
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('logs', {logs: logs.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows, isEdited: false});
+    },
+
+    async getFilteredLogs(req, res) {
+        const logs = await massMediaRepository.getFilteredLogs(req.query.date, req.query.login, req.query.type);
+        const types = await massMediaRepository.getTypes();
+        const currentPerson = await massMediaRepository.getCurrentPerson();
+        res.render('logs', {logs: logs.rows, login: currentPerson.rows[0].login, role: currentPerson.rows[0].role, id: currentPerson.rows[0].id,
+            isRegistrator: currentPerson.rows[0].role === "Реєстратор", types: types.rows});
     },
 }
