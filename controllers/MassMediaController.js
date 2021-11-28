@@ -53,6 +53,15 @@ module.exports = {
         const logins = await massMediaRepository.getLogins();
         res.render('newMassMedia', {logins: logins.rows});
     },
+    
+
+    async getMediaForEdit(req, res) {
+        const logins = await massMediaRepository.getLogins();
+        const mass_media = await massMediaRepository.getMassMediaById(req.params.id);
+        console.log(mass_media)
+        const isZMI = mass_media.rows[0].type == 'ЗМІ';
+        res.render('editMassMedia', {logins: logins.rows, mass_media: mass_media.rows[0], isZMI:isZMI,  old_date_exists: mass_media.rows[0].date !== null});
+    },
 
     async addMassMedia(req, res) {
         const newMassMedia = await massMediaRepository.addMassMedia(req.body);
@@ -86,7 +95,7 @@ module.exports = {
 
     async updateMassMedia(req, res) {
         const updatedMassMedia = await massMediaRepository.editMassMedia(req.body, req.params.id);
-        const log = await massMediaRepository.addUpdateLog(updatedMassMedia.rows[0]);
+        const log = await massMediaRepository.addUpdateLog(updatedMassMedia);
         const mass_media = await massMediaRepository.getMassMediaById(req.params.id);
         res.redirect(`/mass_medias/${mass_media.rows[0].id}`);
     },

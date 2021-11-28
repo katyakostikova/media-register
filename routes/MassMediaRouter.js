@@ -10,4 +10,5 @@ router.post('/', massMediaController.addMassMedia);
 router.get('/allLogs', massMediaController.getAllLogs);
 router.get('/filteredLogs', massMediaController.getFilteredLogs);
 router.post('/:id/edit', massMediaController.updateMassMedia);
+router.get('/:id/edit', massMediaController.getMediaForEdit);
 module.exports = router;

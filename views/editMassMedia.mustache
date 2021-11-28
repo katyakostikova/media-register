@@ -52,7 +52,7 @@
             <div class="rightPartMainDiv">
                 {{#mass_media}}
                 <form
-                    action="/forms/{{ id }}/edit"
+                    action="/mass_medias/{{ id }}/edit"
                     ,
                     method="post"
                     ,
@@ -84,6 +84,22 @@
                                     value="{{ form_login }}"
                                     type="hidden"
                                 />
+                                 <input
+                                    name="person_id"
+                                    value="{{ person_id }}"
+                                    type="hidden"
+                                />
+                                <input
+                                    name="who_registered"
+                                    value="{{ who_registered }}"
+                                    type="hidden"
+                                />
+                                <input
+                                    name="id"
+                                    value="{{ id }}"
+                                    type="hidden"
+                                />
+                                
                             </div>
                         </div>
                         <div class="tileDive">
@@ -125,8 +141,8 @@
                             <div>
                                 <select class="statusInput" name="type">
                                     <option value="">-- вид --</option>
-                                    <option value="ЗМІ">ЗМІ</option>
-                                    <option value="ІА">ІА</option>
+                                    <option value="ЗМІ"  {{#isZMI}} selected {{/isZMI}}>ЗМІ</option>
+                                    <option value="ІА" {{^isZMI}} selected {{/isZMI}}>ІА</option>
                                 </select>
                                 <input
                                     name="old_type"
@@ -146,9 +162,9 @@
                             <img src="/images/calendar.png" alt="date of usage">
                             <p>Дата реєстрації</p>
                             <div>
-                                <input class="dateInput" type="date" name="date_registarion" value="{{date_registarion}}"/>
+                                <input class="dateInput" type="date" name="date_registarion" value="{{date}}"/>
                                 {{#old_date_exists}}
-                                <input name="old_date_registarion" value="{{date_registarion}}" type="hidden">
+                                <input name="old_date_registarion" value="{{date}}" type="hidden">
                                 {{/old_date_exists}}
                             </div>
                         </div>

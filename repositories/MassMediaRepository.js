@@ -95,7 +95,7 @@ class MassMediaRepository {
 
     async getMassMediaById(id) {
         return await db.query(`select mass_media.id, number, series, to_char(date_registarion, 'YYYY-MM-DD') as date, type, mass_media.name, language, date_registarion, scope_of_distribution, who_registered, frequency_of_issue, amount, is_active,
-        persons.name as pername, surname, midname from 
+        persons.name as pername, surname, midname, person_id from 
 	    mass_media inner join persons on mass_media.person_id = persons.id 
 	    where mass_media.id = ${id}`);
     };
@@ -130,21 +130,33 @@ class MassMediaRepository {
 
     
     async editMassMedia(massMediaData, id) {
-        await db.query(`update mass_media set number = ${mass_media.number}, series = ${mass_media.series}, type = '${massMediaData.type.toString()}', 
-        name = '${massMediaData.name.toString()}', language = '${massMediaData.language.toString()}', date_registarion = '${massMediaData.date_registarion.toString()}', 
-        scope_of_distribution = '${massMediaData.scope_of_distribution.toString()}', frequency_of_issue = '${massMediaData.frequency_of_issue.toString()}', 
-        amount = ${massMediaData.amount}, objectives = null, 
-        person_id = (select id from persons where (login = '${massMediaData.login.toString()}')),
-        who_registered = '${massMediaData.who_registered.toString()}'`); //where id=${id}
+        console.log(massMediaData)
+       
+      const result =  await db.query(`update mass_media set number = ${massMediaData.number}, series = ${massMediaData.series}, type = '${massMediaData.type.toString()}', 
+                        name = '${massMediaData.name.toString()}', language = '${massMediaData.language.toString()}', date_registarion = '${massMediaData.date_registarion.toString()}', 
+                        scope_of_distribution = '${massMediaData.scope_of_distribution.toString()}', frequency_of_issue = '${massMediaData.frequency_of_issue.toString()}', 
+                        amount = ${massMediaData.amount}
+                        where id=${id}`);
 
-        await db.query(`create table temp as (select id, number, series, type, name, language, date_registarion, scope_of_distribution,
+
+        if (result) {
+            return massMediaData;
+        } else {
+            return {};
+        }
+
+
+        //person_id = (select id from persons where (login = '${massMediaData.login.toString()}')),
+        //who_registered = '${massMediaData.who_registered.toString()}'); //
+
+    /*    await db.query(`create table temp as (select id, number, series, type, name, language, date_registarion, scope_of_distribution,
         frequency_of_issue, amount, objectives, person_id, who_registered from mass_media where (id = ${id}));
         alter table temp add column temp_id serial primary key, add column old_number int,
         add column old_series int, add column old_type int, add column old_name int,
         add column old_language int, add column old_date_registarion date, add column old_scope_of_distribution text, 
         add column old_frequency_of_issue text, add column old_amount text, add column old_objectives text,
         add column who_registered text, add column old_login text, add column update_date date;
-        update temp set old_number = ${massMediaData.old_number}, old_series = ${massMediaData.old_series}, old_type = ${massMediaData.old_type},
+        update temp set old_number = ${massMediaData.old_number}, old_series = ${massMediaData.old_series}, old_type = '${massMediaData.old_type}',
         old_name = ${massMediaData.old_name}, old_language = ${massMediaData.old_language}, old_date_registarion = ${massMediaData.old_date_registarion},
         old_scope_of_distribution = ${massMediaData.old_scope_of_distribution}, old_frequency_of_issue = ${massMediaData.old_frequency_of_issue},
         old_amount = ${massMediaData.old_amount}, old_objectives = null, who_registered=${massMediaData.who_registered},
@@ -152,12 +164,53 @@ class MassMediaRepository {
 
        
         const temp = await db.query(`select * from temp`);
+*/
 
 
-          return await db.query(`select id, number, series, person_id, 
+
+   
+
+    
+
+var data = {
+    old_number:massMediaData.old_number,
+    old_series:massMediaData.old_series,
+    old_type: massMediaData.old_type,
+    old_name: massMediaData.old_name,
+    old_language: massMediaData.old_language,
+    old_date_registarion: massMediaData.old_date_registarion,
+    old_scope_of_distribution: massMediaData.old_scope_of_distribution,
+    old_frequency_of_issue: massMediaData.old_frequency_of_issue,
+    update_date: moment().format('L').toString(),
+    old_login: massMediaData.old_login,
+    old_objectives: massMediaData.old_objectives,
+    who_registered: massMediaData.who_registered,
+    old_amount: massMediaData.old_amount,
+   
+    id: id,
+    number: massMediaData.number,
+    series: massMediaData.series,
+    type: massMediaData.type,
+    name: massMediaData.name,
+    language: massMediaData.language,
+    date_registarion: massMediaData.date_registarion,
+    scope_of_distribution: massMediaData.scope_of_distribution,
+    frequency_of_issue: massMediaData.frequency_of_issue,
+    amount: massMediaData.amount,
+    person_id: massMediaData.person_id,
+    who_registered: massMediaData.who_registered,
+    objectives: massMediaData.objectives
+}
+
+console.log(data)
+
+
+return data;
+
+        /*  return await db.query(`select id, number, series, person_id, 
           old_number, old_series, old_type, old_name, old_language, old_date_registarion,
           old_scope_of_distribution, old_frequency_of_issue, old_amount, old_objectives, old_who_registered, old_login,
-          to_char(update_date, 'YYYY-MM-DD') as update_date from temp where (temp_id = ${temp.rows[0].temp_id})`);
+          to_char(update_date, 'YYYY-MM-DD') as update_date from temp where (temp_id = ${temp.rows[0].temp_id})`);*/
       }
 
     //изменения во вкладке доков
@@ -259,14 +312,16 @@ class MassMediaRepository {
     };
 
     async addUpdateLog(data) {
-        await db.query(`insert into logs (type_id, form_id, person_id, date, old_number, old_series, old_type, old_name, old_language, to_char(old_date_registarion, 'YYYY-MM-DD') as old_date_registarion,
+        console.log(data)
+        
+        return await db.query(`insert into logs (type_id, mass_media_id, person_id,
+         date, old_number, old_series, old_type, old_name, old_language, old_date_registarion,
         old_scope_of_distribution, old_frequency_of_issue, old_amount, old_objectives, old_who_registered, old_person_id) 
-        values (2, ${data.id}, ${data.person_id}, '${data.update_date.toString()}', ${data.old_number}, ${data.old_series}, '${data.old_type.toString()}', '${data.old_name.toString()}', 
+        values (2, ${data.id}, ${data.person_id}, '${moment().format('Y-M-D hh:mm:ss').toString()}', ${data.old_number}, ${data.old_series}, '${data.old_type.toString()}', '${data.old_name.toString()}', 
         '${data.old_language.toString()}', '${data.old_date_registarion.toString()}', '${data.old_scope_of_distribution.toString()}', 
         '${data.old_frequency_of_issue.toString()}', ${data.old_amount}, 
-        '${data.old_objectives.toString()}', '${data.old_who_registered.toString()}', 
-        (select id from persons where (login = '${data.old_login.toString()}')))`);
-        return await db.query(`drop table temp`);
+        null, '${data.who_registered.toString()}', 
+         ${data.person_id})`);
     };
 }
 
