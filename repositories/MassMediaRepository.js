@@ -179,6 +179,10 @@ class MassMediaRepository {
         return await db.query(`select * from persons where (role = 'Реєстратор')`);
     };
 
+    async getUsers() {
+        return await db.query(`select * from persons where (role = 'Користувач')`);
+    };
+
     async activateRegistrator(id) {
         return await db.query(`update persons set is_active = true where (id = ${id})`);
     };

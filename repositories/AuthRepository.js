@@ -65,7 +65,7 @@ class AuthRepository {
        ) values (
        '${adminData.name.toString()}', '${adminData.surname.toString()}', '${adminData.midname.toString()}', (select id from passports where number = '${adminData.passport_number.toString()}'), '${adminData.birthday.toString()}', ${adminData.taxnum}, 
        '${adminData.login.toString()}', '${md5(adminData.password).toString()}', (select id from foundations where name = '${adminData.foundations.toString()}'), (select id from positions where name = '${adminData.position.toString()}'), 
-       true, 'Коистувач', '${adminData.email.toString()}')
+       true, 'Користувач', '${adminData.email.toString()}')
        `
        );
    };
@@ -92,10 +92,18 @@ class AuthRepository {
             if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
             return "";
         }
-        else {
+        else if (type === 3) {
             let foundRegistrators = await this.getUser(data.login.toString());
             if (foundRegistrators.rows[0].count !== '0') {
                 return "Error: Реєстратор з таким логіном вже існує";
+            }
+            if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
+            return "";
+        }
+        else if (type === 4) {
+            let foundUser = await this.getUser(data.login.toString());
+            if (foundUser.rows[0].count !== '0') {
+                return "Error: Користувач з таким логіном вже існує";
             }
             if (data.password !== data.password_confirmation) return "Error: паролі не співпадають";
             return "";

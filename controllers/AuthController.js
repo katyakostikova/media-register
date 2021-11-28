@@ -70,7 +70,7 @@ module.exports = {
              const foundations = await authRepository.getFoundations();
              const positions = await authRepository.getPositions();
              const passAuth = await authRepository.getPassportAuth();
-             res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+             res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, role:'registrator'});
              return;
          }
          const added = await authRepository.addRegistrator(req.body);
@@ -85,18 +85,18 @@ module.exports = {
 
 //TODO 
     async addUser(req, res) {
-         const error = await authRepository.getErrorMessage(req.body, 1);
+         const error = await authRepository.getErrorMessage(req.body, 4);
          if (error !== "") {
              const foundations = await authRepository.getFoundations();
              const positions = await authRepository.getPositions();
              const passAuth = await authRepository.getPassportAuth();
-             res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+             res.render('registration', {errorMessage: error, foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, role:'user'});
              return;
          }
-         const added = await authRepository.addRegistrator(req.body);
+         const added = await authRepository.addUser(req.body);
          if (added) {
-             const registrators = await massMediaRepository.getRegistrators();
-            res.render('registrators', {registrators: registrators.rows});
+             const users = await massMediaRepository.getUsers();
+            res.render('users', {users: users.rows});
          }
          else {
              res.redirect('/error');

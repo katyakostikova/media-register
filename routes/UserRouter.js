@@ -3,6 +3,8 @@ const userController = require('../controllers/UserController');
 
 //router.get('/', userController.getPersons);
 router.get('/registrators', userController.getRegistrators);
+router.get('/users', userController.getUsers);
+router.get('/users/:id', userController.viewUser);
 router.get('/registrators/:id', userController.viewRegistrator);
 router.get('/activate/:id', userController.activateRegistrator);
 router.get('/deactivate/:id', userController.deactivateRegistrator);
