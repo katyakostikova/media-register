@@ -27,7 +27,6 @@
         </div>
         <div class="authImgDiv">
             <a href="/auth/login">
-                <img id="authImg" src="/images/user.png" alt="login">
             </a>
         </div>
     {{/login}}
@@ -40,7 +39,7 @@
                 <div>
                     {{^is_edited}}
                         <a href="/mass_medias/{{mass_media_id}}">
-                            <div>
+                            <div class='logBox'>
                                 <p>Дія:&nbsp;&nbsp;{{type}}</p>
                                 <p>Дата зміни/створення:&nbsp;&nbsp;{{date}}</p>
                                 <p>Ким змінено/створено:&nbsp;&nbsp;{{login}}</p>
@@ -74,14 +73,12 @@
         <form action="/mass_medias/filteredLogs" , method="GET" , enctype="multipart/form-data">
             <div class="filtersMainDiv">
                 <div class="tileDive">
-                    <img src="/images/calendar.png" alt="date of usage">
                     <p>Дата зміни/створення</p>
                     <div>
                         <input class="dateInput" type="date" name="date"/>
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/user.png" alt="user">
                     <p>Ким змінено/створено</p>
                     <div>
                         <select class="statusInput" name="login">
@@ -93,7 +90,6 @@
                     </div>
                 </div>
                 <div class="tileDive">
-                    <img src="/images/status.png" alt="action type">
                     <p>Вид дій</p>
                     <div>
                         <select class="statusInput" name="type">

@@ -2,7 +2,6 @@ const db = require('../db');
 const md5 = require('md5')
 
 
-//@ВРОДЕ ПЕРЕДЕЛАЛА@
 class AuthRepository {
     async getFoundations() {
         return await db.query(`select * from foundations`);

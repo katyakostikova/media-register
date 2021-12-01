@@ -37,19 +37,9 @@
             {{/login}}
         </div>
         <div class="mainDiv">
-            <div class="leftPartMainDiv">
+           
+            <div class="rightPartMainDiv newMassMedia">
                 <p class="mainListP">Редагування ЗМІ або ІА</p>
-                <div class="formDiv">
-                    {{#mass_media}}
-                    <div>
-                        <div>
-                            <img src="/images/document.png" alt="document" />
-                        </div>
-                    </div>
-                    {{/mass_media}}
-                </div>
-            </div>
-            <div class="rightPartMainDiv">
                 {{#mass_media}}
                 <form
                     action="/mass_medias/{{ id }}/edit"
@@ -159,7 +149,6 @@
                             </div>
                         </div>
                         <div class="tileDive">
-                            <img src="/images/calendar.png" alt="date of usage">
                             <p>Дата реєстрації</p>
                             <div>
                                 <input class="dateInput" type="date" name="date_registarion" value="{{date}}"/>
