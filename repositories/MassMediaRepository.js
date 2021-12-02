@@ -115,7 +115,7 @@ class MassMediaRepository {
                  '${massMediaData.type.toString()}', '${massMediaData.name.toString()}',
                  '${massMediaData.language.toString()}', '${moment().format('Y-M-D').toString()}',
                  '${massMediaData.scope_of_distribution.toString()}', '${massMediaData.frequency_of_issue.toString()}',
-                 '${massMediaData.amount}', null, (select id from persons where (login = '${massMediaData.login.toString()}')),
+                 '${massMediaData.amount}', null, (select id from persons where (login = '${massMediaData.login_user.toString()}')),
                  '${massMediaData.login.toString()}')`);
 
         if (result) {
@@ -145,32 +145,6 @@ class MassMediaRepository {
             return {};
         }
 
-
-        //person_id = (select id from persons where (login = '${massMediaData.login.toString()}')),
-        //who_registered = '${massMediaData.who_registered.toString()}'); //
-
-    /*    await db.query(`create table temp as (select id, number, series, type, name, language, date_registarion, scope_of_distribution,
-        frequency_of_issue, amount, objectives, person_id, who_registered from mass_media where (id = ${id}));
-        alter table temp add column temp_id serial primary key, add column old_number int,
-        add column old_series int, add column old_type int, add column old_name int,
-        add column old_language int, add column old_date_registarion date, add column old_scope_of_distribution text, 
-        add column old_frequency_of_issue text, add column old_amount text, add column old_objectives text,
-        add column who_registered text, add column old_login text, add column update_date date;
-        update temp set old_number = ${massMediaData.old_number}, old_series = ${massMediaData.old_series}, old_type = '${massMediaData.old_type}',
-        old_name = ${massMediaData.old_name}, old_language = ${massMediaData.old_language}, old_date_registarion = ${massMediaData.old_date_registarion},
-        old_scope_of_distribution = ${massMediaData.old_scope_of_distribution}, old_frequency_of_issue = ${massMediaData.old_frequency_of_issue},
-        old_amount = ${massMediaData.old_amount}, old_objectives = null, who_registered=${massMediaData.who_registered},
-        old_login = '${massMediaData.old_login.toString()}', update_date = '${moment().format('L').toString()}'`);
-
-       
-        const temp = await db.query(`select * from temp`);
-*/
-
-
-
-   
-
-    
 
 var data = {
     old_number:massMediaData.old_number,
@@ -213,7 +187,6 @@ return data;
           to_char(update_date, 'YYYY-MM-DD') as update_date from temp where (temp_id = ${temp.rows[0].temp_id})`);*/
       }
 
-    //изменения во вкладке доков
     async editLogMassMedia(massMediaData, id) {
         return await db.query(`update mass_media set number = ${mass_media.number}, series = ${mass_media.series}, type = '${massMediaData.type.toString()}', 
         name = '${massMediaData.name.toString()}', language = '${massMediaData.language.toString()}', date_registarion = '${massMediaData.date_registarion.toString()}', 

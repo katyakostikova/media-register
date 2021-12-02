@@ -4,10 +4,8 @@ const authRepository = new AuthRepository();
 const MassMediaRepository = require('../repositories/MassMediaRepository');
 const massMediaRepository = new MassMediaRepository();
 
-//@СДЕЛАЛА@
 module.exports = {
 
-    //TODO need to add info about Role of current user
     async getRegData(req, res) {
         const foundations = await authRepository.getFoundations();
         const positions = await authRepository.getPositions();
@@ -24,7 +22,6 @@ module.exports = {
         res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, id: currentPerson.rows[0].id,
             role: currentPerson.rows[0].role === "Адміністратор" ? "registrator" : ""});
 
-       // res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
     },
 
     async getRegDataUser(req, res) {
@@ -43,7 +40,7 @@ module.exports = {
         res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows, id: currentPerson.rows[0].id,
             role: "user"});
 
-       // res.render('registration', {foundations: foundations.rows, positions: positions.rows, passAuth: passAuth.rows});
+    
     },
 
      async addAdmin(req, res) {
@@ -83,7 +80,6 @@ module.exports = {
          }
      },
 
-//TODO 
     async addUser(req, res) {
          const error = await authRepository.getErrorMessage(req.body, 4);
          if (error !== "") {

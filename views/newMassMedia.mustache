@@ -79,6 +79,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="tileDive">
+                    <p>На кого зарестровано</p>
+                    <div>
+                        <select class="statusInput" name="login_user">
+                            <option value="">-- логін --</option>
+                            {{#logins}}
+                                <option value="{{login}}">{{login}}</option>
+                            {{/logins}}
+                        </select>
+                    </div>
+                </div>
                 <div>
                     <input type="submit" value="Додати">
                 </div>
