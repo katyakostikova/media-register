@@ -11,17 +11,17 @@
     </div>
 </div>
 <div class="menuDiv rightDiv">
-    {{#login}}
+    {{#loginCurrent}}
         <div class="roleDiv">
-            <a id="userDataP">{{role}}: {{login}}</a>
+            <a id="userDataP">{{role}}: {{loginCurrent}}</a>
         </div>
         <div class="authImgDiv">
             <a href="/" id="logoutA">
                 <img id="authImg" src="/images/logout3.png" alt="logout">
             </a>
         </div>
-    {{/login}}
-    {{^login}}
+    {{/loginCurrent}}
+    {{^loginCurrent}}
         <div class="roleDiv">
             <p id="userDataP">Користувач</p>
         </div>
@@ -30,7 +30,7 @@
                 <img id="authImg" src="/images/user.png" alt="login">
             </a>
         </div>
-    {{/login}}
+    {{/loginCurrent}}
 </div>
 <div class="userPage">
     <div class="leftPartMainDiv" id="withoutLineDiv">
@@ -56,6 +56,7 @@
                             {{/isRegOnPage}}
                         {{/isRegistrator}}
 
+                    {{^isRegistrator}}
                          {{#isUser}}
                                 {{^isUserOnPage}}
                                     <div class="registratorEditDiv">
@@ -63,6 +64,8 @@
                                     </div>
                                 {{/isUserOnPage}}
                         {{/isUser}}
+                    {{/isRegistrator}}
+
                     </div>
                 </div>
             {{/user}}
@@ -76,6 +79,7 @@
                     <a class="userActionButton" href="/mass_medias/all">Перегляд ЗМІ та ІА</a>
                 </div>
 
+                 {{^isRegistrator}}
                  {{^isUser}}
                 <div class="userAction">
                         <a class="userActionButton" href="/auth/registration/user">Зареєструвати нового Користувача</a>
@@ -84,9 +88,7 @@
                     <div class="userAction">
                         <a class="userActionButton" href="/users/users">Перегляд існуючих Користувачів</a>
                     </div>
-                 {{/isUser}}
-                {{^isRegistrator}}
-                 {{^isUser}}
+           
                     <div class="userAction">
                         <a class="userActionButton" href="/users/registrators">Перегляд існуючих Реєстраторів</a>
                     </div>

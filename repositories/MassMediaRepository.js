@@ -197,7 +197,7 @@ return data;
     };
 
     async getUserById(id) {
-        return await db.query(`select id, name, surname, midname, to_char(birthday, 'YYYY-MM-DD') as birthday, role, is_active from persons where (id = ${id})`);
+        return await db.query(`select id, name, login, surname, midname, to_char(birthday, 'YYYY-MM-DD') as birthday, role, is_active from persons where (id = ${id})`);
     };
 
 

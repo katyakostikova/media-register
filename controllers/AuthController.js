@@ -4,6 +4,8 @@ const authRepository = new AuthRepository();
 const MassMediaRepository = require('../repositories/MassMediaRepository');
 const massMediaRepository = new MassMediaRepository();
 
+const nodemailer = require('nodemailer');
+
 module.exports = {
 
     async getRegData(req, res) {
@@ -91,6 +93,32 @@ module.exports = {
          }
          const added = await authRepository.addUser(req.body);
          if (added) {
+
+            console.log(req.body)
+
+            var mail = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: 'developer.pro77@gmail.com',
+                pass: '1Pro23456789'
+              }
+            });
+
+                var mailOptions = {
+               from: 'developer.pro77@gmail.com',
+               to: req.body.email,
+               subject: 'Password for Service',
+               text: 'Here is your password '+ req.body.password + ' and username ' + req.body.login,
+                }
+  
+            mail.sendMail(mailOptions, function(error, info){
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                  }
+            });
+
              const users = await massMediaRepository.getUsers();
             res.render('users', {users: users.rows});
          }

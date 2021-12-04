@@ -40,11 +40,14 @@
             </div>
             <div class="centralFormDiv">
                 <div>
-                    <input class="regInput" type="text" name="passport_number" placeholder="Номер паспорта" type="number" required>
+                    <input class="regInput"  name="passport_number" placeholder="Номер паспорта" maxlength="6" minlength="6" type="text" 
+                    pattern="[0-9]{6}" aria-label="6-digit number" title="6 цифер номера паспорта" 
+                    required>
                     <!--                    <label>Номер паспорта</label>-->
                 </div>
                 <div>
-                    <input class="regInput" type="text" name="passport_series" maxlength="2" minlength="2" placeholder="Серія паспорта">
+                    <input class="regInput" type="text" name="passport_series" maxlength="2" minlength="2" placeholder="Серія паспорта"
+                     pattern="[A-Za-zА-Яа-я]{2}" aria-label="2-chars of passport" title="2 літери серії номера паспорта"  required>
                     <!--                    <label>Серія паспорта</label>-->
                 </div>
                 <div>
@@ -74,7 +77,7 @@
             </div>
             <div class="rightFormDiv">
                 <div>
-                    <input class="regInput" type="text" name="email" placeholder="Електронна пошта" required>
+                    <input class="regInput" type="email" name="email" placeholder="Електронна пошта" required>
                     <!--                    <label>Email</label>-->
                 </div>
                 <div>
@@ -86,7 +89,7 @@
                     <!--                    <label>Підтвердити пароль</label>-->
                 </div>
                 <div>
-                    <select class="regInput" class="statusInput" name="foundations">
+                    <select class="regInput" class="statusInput" name="foundations" required>
                         <option value="">-- Організація --</option>
                         {{#foundations}}
                             <option value="{{name}}">{{name}}</option>
@@ -94,7 +97,7 @@
                     </select>
                 </div>
                 <div>
-                    <select class="regInput" class="statusInput" name="position">
+                    <select class="regInput" class="statusInput" name="position" required>
                         <option value="">-- Посада --</option>
                         {{#positions}}
                             <option value="{{name}}">{{name}}</option>
